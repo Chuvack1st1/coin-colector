@@ -1,0 +1,62 @@
+{
+    "name": "spawnControl",
+    "maps": [
+        {
+            "name": "SpawnPlayer",
+            "id": "5077c5c2-783c-492d-8c89-9ab4600fb82c",
+            "actions": [
+                {
+                    "name": "Spawn",
+                    "type": "Value",
+                    "id": "c1a84b6f-8872-47cb-bb1c-e4013a01e7f0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b85c5c59-d778-4341-87d7-cd3c98c31de1",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "SaveGame",
+            "id": "6cc469de-86c6-4fe8-9db7-8919189c35fe",
+            "actions": [
+                {
+                    "name": "Save",
+                    "type": "Button",
+                    "id": "769ed57e-3ec3-400b-baf4-2baa711b7e81",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5401068f-914b-4be9-bc4e-d3e9228b039d",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Save",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
