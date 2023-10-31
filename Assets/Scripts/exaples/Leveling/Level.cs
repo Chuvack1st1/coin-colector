@@ -10,8 +10,21 @@ public class Level : MonoBehaviour
 
     public Goal Goal { get => goal; }
 
-    public void Init()
+    public void Init(LevelSpawnService levelSpawnService)
     {
         goal.AddTask(new Task());
+        InitLevelCanvas(levelSpawnService);
+    }
+    private void InitLevelCanvas(LevelSpawnService levelSpawnService)
+    {
+        var levelCanvas = GetComponentInChildren<LevelCanvas>();
+
+        if (levelCanvas == null)
+        {
+            Debug.Log("Level canvas isnt finded");
+            return;
+        }
+
+        levelCanvas.Init(levelSpawnService);
     }
 }

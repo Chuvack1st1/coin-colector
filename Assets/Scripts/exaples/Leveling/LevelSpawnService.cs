@@ -13,12 +13,12 @@ public class LevelSpawnService : MonoBehaviour
     {
         SpawnLevel(0);
 
-        InitLevelCanvas();
+        
     }
 
     public void SpawnLevel(int levelNumber)
     {
-        Debug.Log("qwe");
+        
         SpawnLevel(levelsPrefabs[levelNumber]);
     }
 
@@ -29,30 +29,19 @@ public class LevelSpawnService : MonoBehaviour
 
         DespawnCurrentLevel();
 
-        level.Init();
-
         var SpawnedLevel = Instantiate(level.gameObject);
 
-        currentSpawnedLevel = level.GetComponent<Level>();
+        SpawnedLevel.GetComponent<Level>().Init(this);
+
+        currentSpawnedLevel = SpawnedLevel.GetComponent<Level>();
     }
 
-    private void InitLevelCanvas()
-    {
-        var levelCanvas = currentSpawnedLevel.GetComponentInChildren<LevelCanvas>();
-
-        if (levelCanvas == null)
-        {
-            Debug.Log("Level canvas isnt finded");
-            return;
-        }
-
-        levelCanvas.Init(this);
-    }
     private void DespawnCurrentLevel()
     {
         if (currentSpawnedLevel != null)
         {
-            Destroy(currentSpawnedLevel);
+            Destroy(currentSpawnedLevel.gameObject);
+            currentSpawnedLevel = null;
         }
     }
 }

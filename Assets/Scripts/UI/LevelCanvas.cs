@@ -9,8 +9,7 @@ public class LevelCanvas : MonoBehaviour
 
     public void Init(LevelSpawnService levelSpawnService)
     {
-        menuUIOpenClose.Init();
-
         chooseLevelWndow.Init(levelSpawnService);
+        menuUIOpenClose.Init();
     }
 }
