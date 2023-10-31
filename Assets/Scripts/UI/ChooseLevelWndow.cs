@@ -14,11 +14,11 @@ public class ChooseLevelWndow : MonoBehaviour
             
             if (levelUIcanvas != null)
             {
-                levelUIcanvas.ControllButton.onClick.AddListener(() => Debug.Log("asd"));
-                Debug.Log(levelUIcanvas.ControllButton.onClick);
+                levelUIcanvas.ControllButton.onClick.AddListener(() => levelSpawnService.SpawnLevel(levelUIcanvas.LevelNumber));
+                Debug.Log(levelSpawnService);
             }
 
-            levelUIcanvas.ControllButton.onClick.AddListener(() => levelSpawnService.SpawnLevel(levelUIcanvas.LevelNumber));
+            
         }
     }
 }
