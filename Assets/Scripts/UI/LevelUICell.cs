@@ -11,4 +11,9 @@ public class LevelUICell : MonoBehaviour
 
     [SerializeField] private Button _controllButton;
     public Button ControllButton => _controllButton;
+
+    public void Init(LevelSpawnService levelSpawnService)
+    {
+       ControllButton.onClick.AddListener(() => levelSpawnService.SpawnLevel(LevelNumber));
+    }
 }

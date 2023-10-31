@@ -4,21 +4,13 @@ using UnityEngine;
 
 public class ChooseLevelWndow : MonoBehaviour
 {
-    [SerializeField] private Transform _content;
+    [SerializeField] private List<LevelUICell> levelUICells = new List<LevelUICell>();
 
     public void Init(LevelSpawnService levelSpawnService)
     {
-        for (int i = 0; i < _content.childCount; i++)
+        for (int i = 0; i < levelUICells.Count; i++)
         {
-            var levelUIcanvas = _content.GetChild(i).GetComponent<LevelUICell>();
-            
-            if (levelUIcanvas != null)
-            {
-                levelUIcanvas.ControllButton.onClick.AddListener(() => levelSpawnService.SpawnLevel(levelUIcanvas.LevelNumber));
-                Debug.Log(levelSpawnService);
-            }
-
-            
+            levelUICells[i].Init(levelSpawnService);
         }
     }
 }
