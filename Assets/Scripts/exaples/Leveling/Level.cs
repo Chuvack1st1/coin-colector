@@ -14,6 +14,7 @@ public class Level : MonoBehaviour
     {
         goal.AddTask(new Task());
         InitLevelCanvas(levelSpawnService);
+        
     }
     private void InitLevelCanvas(LevelSpawnService levelSpawnService)
     {
@@ -26,5 +27,25 @@ public class Level : MonoBehaviour
         }
 
         levelCanvas.Init(levelSpawnService);
+
+        InitLevelQuestCountView(levelCanvas);
+    }
+    public void InitLevelQuestCountView(LevelCanvas levelCanvas)
+    {
+        var questViews = levelCanvas.GetComponentsInChildren<QuestItemScoreVIew>();
+
+        foreach(var questView in questViews)
+        {
+            if (questView != null)
+            {
+                foreach (var task in goal.tasks)
+                {
+                    if(task.QuestItemName == questView.questItem.Name)
+                    {
+                        task.UpdateCurrentScoreCountEvent += questView.OnUpdatedCurrentScoreCount;
+                    }
+                }
+            }
+        }
     }
 }

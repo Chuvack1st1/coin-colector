@@ -19,8 +19,10 @@ public class Bootstrap : MonoBehaviour
 
         var loadedInventory = _saveLoadService.LoadInventory();
 
-        _playerspawner.Init(new PlayerModel(loadedInventory), 
-            _levelSpawnService.currentSpawnedLevel.SpawnPoint);
+        _playerspawner.Init(new PlayerModel(loadedInventory));
+
+        _levelSpawnService.LevelSpawnedEvent += _playerspawner.OnSpawnedLevelChanged;
+        _levelSpawnService.LevelSpawnedEvent += _playerspawner.SpawnPlayerOnSpawnLevel;
 
         _playerspawner.PlayerHasSpawnedEvent += _cameraManager.ActivatePlayerCamera;
         _playerspawner.PlayerHasSpawnedEvent += OnPlayerSpawned;

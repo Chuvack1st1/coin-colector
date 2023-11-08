@@ -24,34 +24,6 @@ public partial class @SpawnControl: IInputActionCollection2, IDisposable
     ""name"": ""spawnControl"",
     ""maps"": [
         {
-            ""name"": ""SpawnPlayer"",
-            ""id"": ""5077c5c2-783c-492d-8c89-9ab4600fb82c"",
-            ""actions"": [
-                {
-                    ""name"": ""Spawn"",
-                    ""type"": ""Value"",
-                    ""id"": ""c1a84b6f-8872-47cb-bb1c-e4013a01e7f0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""b85c5c59-d778-4341-87d7-cd3c98c31de1"",
-                    ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Spawn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""SaveGame"",
             ""id"": ""6cc469de-86c6-4fe8-9db7-8919189c35fe"",
             ""actions"": [
@@ -82,9 +54,6 @@ public partial class @SpawnControl: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // SpawnPlayer
-        m_SpawnPlayer = asset.FindActionMap("SpawnPlayer", throwIfNotFound: true);
-        m_SpawnPlayer_Spawn = m_SpawnPlayer.FindAction("Spawn", throwIfNotFound: true);
         // SaveGame
         m_SaveGame = asset.FindActionMap("SaveGame", throwIfNotFound: true);
         m_SaveGame_Save = m_SaveGame.FindAction("Save", throwIfNotFound: true);
@@ -146,52 +115,6 @@ public partial class @SpawnControl: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // SpawnPlayer
-    private readonly InputActionMap m_SpawnPlayer;
-    private List<ISpawnPlayerActions> m_SpawnPlayerActionsCallbackInterfaces = new List<ISpawnPlayerActions>();
-    private readonly InputAction m_SpawnPlayer_Spawn;
-    public struct SpawnPlayerActions
-    {
-        private @SpawnControl m_Wrapper;
-        public SpawnPlayerActions(@SpawnControl wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Spawn => m_Wrapper.m_SpawnPlayer_Spawn;
-        public InputActionMap Get() { return m_Wrapper.m_SpawnPlayer; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(SpawnPlayerActions set) { return set.Get(); }
-        public void AddCallbacks(ISpawnPlayerActions instance)
-        {
-            if (instance == null || m_Wrapper.m_SpawnPlayerActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_SpawnPlayerActionsCallbackInterfaces.Add(instance);
-            @Spawn.started += instance.OnSpawn;
-            @Spawn.performed += instance.OnSpawn;
-            @Spawn.canceled += instance.OnSpawn;
-        }
-
-        private void UnregisterCallbacks(ISpawnPlayerActions instance)
-        {
-            @Spawn.started -= instance.OnSpawn;
-            @Spawn.performed -= instance.OnSpawn;
-            @Spawn.canceled -= instance.OnSpawn;
-        }
-
-        public void RemoveCallbacks(ISpawnPlayerActions instance)
-        {
-            if (m_Wrapper.m_SpawnPlayerActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(ISpawnPlayerActions instance)
-        {
-            foreach (var item in m_Wrapper.m_SpawnPlayerActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_SpawnPlayerActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public SpawnPlayerActions @SpawnPlayer => new SpawnPlayerActions(this);
-
     // SaveGame
     private readonly InputActionMap m_SaveGame;
     private List<ISaveGameActions> m_SaveGameActionsCallbackInterfaces = new List<ISaveGameActions>();
@@ -237,10 +160,6 @@ public partial class @SpawnControl: IInputActionCollection2, IDisposable
         }
     }
     public SaveGameActions @SaveGame => new SaveGameActions(this);
-    public interface ISpawnPlayerActions
-    {
-        void OnSpawn(InputAction.CallbackContext context);
-    }
     public interface ISaveGameActions
     {
         void OnSave(InputAction.CallbackContext context);

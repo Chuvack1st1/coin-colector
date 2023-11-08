@@ -3,6 +3,7 @@ using StarterAssets;
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerSpawner : MonoBehaviour
 {
@@ -21,28 +22,17 @@ public class PlayerSpawner : MonoBehaviour
 
     public CinemachineVirtualCamera PlayerCamera { get => _playerCamera; }
 
-    public void Init(PlayerModel playerModel, Transform spawnPoint)
+    public void Init(PlayerModel playerModel)
     {
         SpawnedPlayer = null;
 
-        if (spawnPoint == null)
-            Debug.LogWarning("spawnPoint is null");
-
-        _spawnPoint = spawnPoint;
-
         _model = playerModel;
 
-        EnableInput();
     }
-
-    private void EnableInput()
+    
+    public void SpawnPlayerOnSpawnLevel(Level level)
     {
-        _spawnControl = new SpawnControl();
-        SpawnControl.SpawnPlayerActions playerSpawnActions = new(_spawnControl);
-
-        playerSpawnActions.Spawn.started += ctx => SpawnPlayer(_playerPrefab);
-
-        _spawnControl.Enable();
+        SpawnPlayer(_playerPrefab);
     }
 
     private void SpawnPlayer(GameObject playerPref)
@@ -106,5 +96,10 @@ public class PlayerSpawner : MonoBehaviour
             return null;
         }
         return playerCamera;
+    }
+
+    public void OnSpawnedLevelChanged(Level level)
+    {
+        _spawnPoint = level.SpawnPoint;
     }
 }

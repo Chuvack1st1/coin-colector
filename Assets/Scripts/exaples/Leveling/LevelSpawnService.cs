@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
@@ -9,11 +10,12 @@ public class LevelSpawnService : MonoBehaviour
 
     public Level currentSpawnedLevel = null;
 
+    public Action<Level> LevelSpawnedEvent = null;
+
     public void SpawnStartLevel()
     {
         SpawnLevel(0);
 
-        
     }
 
     public void SpawnLevel(int levelNumber)
@@ -34,6 +36,8 @@ public class LevelSpawnService : MonoBehaviour
         SpawnedLevel.GetComponent<Level>().Init(this);
 
         currentSpawnedLevel = SpawnedLevel.GetComponent<Level>();
+
+        LevelSpawnedEvent?.Invoke(currentSpawnedLevel);
     }
 
     private void DespawnCurrentLevel()

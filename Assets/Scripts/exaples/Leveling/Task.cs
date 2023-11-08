@@ -15,6 +15,8 @@ public class Task
 
     public Action TaskCompleteEvent;
 
+    public Action<int> UpdateCurrentScoreCountEvent;
+
     public bool IsCompleted { get => _isCompleted; 
         private set 
         {
@@ -32,6 +34,7 @@ public class Task
         }
 
         _currentCountComplening += valueToAdd;
+        UpdateCurrentScoreCountEvent.Invoke(_currentCountComplening);
         if (_currentCountComplening == _totaleCountComplening)
             IsCompleted = true;
     }

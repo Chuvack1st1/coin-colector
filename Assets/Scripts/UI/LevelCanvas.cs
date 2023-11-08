@@ -9,7 +9,14 @@ public class LevelCanvas : MonoBehaviour
 
     public void Init(LevelSpawnService levelSpawnService)
     {
-        chooseLevelWndow.Init(levelSpawnService);
+        if(chooseLevelWndow != null)
+        {
+            chooseLevelWndow.Init(levelSpawnService);
+        }
+        else
+        {
+            Debug.Log("chooseLevelWndow isnt init in the inspector");
+        }
         menuUIOpenClose.Init();
     }
 }

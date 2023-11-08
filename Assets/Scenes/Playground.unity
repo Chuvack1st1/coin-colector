@@ -543,7 +543,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773988224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.91852, y: -8.266318, z: 3.5241756}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -589,7 +589,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809164388}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.402748, y: -2.8158035, z: 8.440087}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -610,6 +610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelsPrefabs:
   - {fileID: 3557106108320299153, guid: 4576f759d5498dc4ea70c30e33bc02ee, type: 3}
+  - {fileID: 3279791611008997062, guid: 8bcc10cc99ca39c4d8563366e140e62a, type: 3}
   - {fileID: 1229149780830530127, guid: 9f96f1844f3038c4a841b1f2af23caa6, type: 3}
   currentSpawnedLevel: {fileID: 0}
 --- !u!1 &1908175850
