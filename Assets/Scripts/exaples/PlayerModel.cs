@@ -3,10 +3,15 @@ public class PlayerModel
 {
     private Inventory _inventory;
 
-    public PlayerModel(Inventory inventory)
+    private PlayerMovementData _playerMovementData;
+
+    public PlayerMovementData PlayerMovementData => _playerMovementData;
+
+    public PlayerModel(Inventory inventory, PlayerMovmentConfig playerMovmentConfig)
     {
-        Inventory = inventory;
+        _inventory = inventory;
+        _playerMovementData = new PlayerMovementData(playerMovmentConfig);
     }
 
-    public Inventory Inventory { get => _inventory; private set => _inventory = value; }
+    public Inventory Inventory => _inventory; 
 }

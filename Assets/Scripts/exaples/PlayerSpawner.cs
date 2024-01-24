@@ -49,26 +49,13 @@ public class PlayerSpawner : MonoBehaviour
 
         InitPlayerView(spawnedPlayer);
 
-        InitControllerCamera(spawnedPlayer);
+        InitStateMachine(spawnedPlayer);
 
         _playerCamera = InitPlayerCamera(spawnedPlayer);
 
         SpawnedPlayer = spawnedPlayer;
 
         PlayerHasSpawnedEvent?.Invoke(this);
-    }
-
-    private void InitControllerCamera(GameObject spawnedPlayer)
-    {
-        ThirdPersonController thirdPersonController = spawnedPlayer.GetComponent<ThirdPersonController>();
-
-        if(thirdPersonController == null)
-        {
-            Debug.LogWarning("ThirdPersonController isnt finded on player");
-            return;
-        }
-
-        thirdPersonController.Init();
     }
 
     private void InitPlayerView(GameObject spawnedPlayer)
@@ -83,6 +70,19 @@ public class PlayerSpawner : MonoBehaviour
         }
 
         playerView.Init(_model);
+    }
+
+    private void InitStateMachine(GameObject spawnedPlayer)
+    {
+        var playerMovementStateMachine = spawnedPlayer.GetComponent<TestStateMachineClient>();
+
+        if (playerMovementStateMachine == null)
+        {
+            Debug.LogWarning("playerMovementStateMachine isnt finded on player");
+            return;
+        }
+
+        playerMovementStateMachine.Init(_model);
     }
 
     private CinemachineVirtualCamera InitPlayerCamera(GameObject spawnedPlayer)

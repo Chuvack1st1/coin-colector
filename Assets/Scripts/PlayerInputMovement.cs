@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerInputMovement
@@ -18,11 +19,8 @@ public class PlayerInputMovement
 
     private PlayerMovementContol inputs;
     PlayerMovementContol.MovementActions movementActions;
-    public PlayerInputMovement()
-    {
-        Init();
-    }
-    private void Init()
+
+    public void InitWaklingInput()
     {
         inputs = new PlayerMovementContol();
         movementActions = new PlayerMovementContol.MovementActions(inputs);
@@ -35,15 +33,25 @@ public class PlayerInputMovement
         movementActions.Look.performed += OnLook;
         movementActions.Look.canceled += OnLook;
 
-        movementActions.Jump.started += OnJump;
-        movementActions.Jump.performed += OnJump;
-        movementActions.Jump.canceled += OnJump;
-
         movementActions.Sprint.started += OnSprint;
         movementActions.Sprint.performed += OnSprint;
         movementActions.Sprint.canceled += OnSprint;
+    }
 
-        inputs.Enable();
+    public void EnableInput()
+    {
+        if (inputs != null)
+        {
+            inputs.Enable();
+        }
+    }
+
+    public void DisableInput()
+    {
+        if (inputs != null)
+        {
+            inputs.Disable();
+        }
     }
 
     private void OnMove(InputAction.CallbackContext context)

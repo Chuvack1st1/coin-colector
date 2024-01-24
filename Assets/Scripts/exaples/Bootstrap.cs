@@ -8,7 +8,7 @@ public class Bootstrap : MonoBehaviour
     [SerializeField] private PlayerSpawner _playerspawner;
     [SerializeField] private CameraManager _cameraManager;
     [SerializeField] private LevelSpawnService _levelSpawnService;
-
+    [SerializeField] private PlayerMovmentConfig _playerMovmentConfig;
     private void Awake()
     {
         _saveLoadService.Init();
@@ -19,7 +19,7 @@ public class Bootstrap : MonoBehaviour
 
         var loadedInventory = _saveLoadService.LoadInventory();
 
-        _playerspawner.Init(new PlayerModel(loadedInventory));
+        _playerspawner.Init(new PlayerModel(loadedInventory, _playerMovmentConfig));
 
         _levelSpawnService.LevelSpawnedEvent += _playerspawner.OnSpawnedLevelChanged;
         _levelSpawnService.LevelSpawnedEvent += _playerspawner.SpawnPlayerOnSpawnLevel;
